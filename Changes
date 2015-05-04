@@ -2,6 +2,7 @@ Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
         - first release under new management
+        - minimum supported version lowered to 5.008
 
 2.006008  2014-06-17
 	- register Test::Spelling as a development dependency ( haarg )

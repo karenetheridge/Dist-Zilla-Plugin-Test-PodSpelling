@@ -1,7 +1,6 @@
 package Dist::Zilla::Plugin::Test::PodSpelling;
 # vim: ts=4 sts=4 sw=4 et :
 
-use 5.010;
 use strict;
 use warnings;
 
