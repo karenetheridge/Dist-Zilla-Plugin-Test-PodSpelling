@@ -2,9 +2,9 @@ package Dist::Zilla::Plugin::PodSpellingTests;
 use 5.008;
 use strict;
 use warnings;
-BEGIN {
-	our $VERSION = '1.112140';
-}
+
+our $VERSION = '2.006009';
+
 use Moose;
 extends 'Dist::Zilla::Plugin::Test::PodSpelling';
 

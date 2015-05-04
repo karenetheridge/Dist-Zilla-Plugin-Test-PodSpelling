@@ -3,7 +3,7 @@ use 5.010;
 use strict;
 use warnings;
 
-# VERSION
+our $VERSION = '2.006009';
 
 use Moose;
 extends 'Dist::Zilla::Plugin::InlineFiles';
