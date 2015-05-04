@@ -10,7 +10,9 @@ use Moose;
 extends 'Dist::Zilla::Plugin::Test::PodSpelling';
 
 before register_component => sub {
-	warn "!!! [PodSpellingTests] is Deprecated. please use Test::Podspelling\n";
+    warnings::warnif('deprecated',
+        "!!! [PodSpellingTests] is deprecated and will be removed in a future release; replace it with [Test::PodSpelling]\n",
+    );
 };
 
 no Moose;
