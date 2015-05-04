@@ -1,6 +1,6 @@
-Revision history for Perl extension {{$dist->name}}
+Revision history for Perl extension Dist-Zilla-Plugin-Test-PodSpelling
 
-{{$NEXT}}
+2.006009  2015-05-04 03:08:46Z
         - first release under new management
         - minimum supported version lowered to 5.008
         - mark Dist::Zilla::Plugin::PodSpellingTests as deprecated in metadata
