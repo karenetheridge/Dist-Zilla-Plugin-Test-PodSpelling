@@ -4,7 +4,7 @@ package Dist::Zilla::Plugin::Test::PodSpelling;
 use strict;
 use warnings;
 
-our $VERSION = '2.006009';
+our $VERSION = '2.006010';
 
 use Moose;
 extends 'Dist::Zilla::Plugin::InlineFiles';
