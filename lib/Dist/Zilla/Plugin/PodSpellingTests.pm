@@ -35,4 +35,12 @@ name for C<[Test::PodSpelling]> and will be removed in a few versions.
 
 L<Dist::Zilla::Plugin::Test::PodSpelling>
 
+=head1 SUPPORT
+
+=for stopwords irc
+
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginTest-PodSpelling>
+(or L<bug-Dist-Zilla-Plugin-Test-PodSpelling@rt.cpan.org|mailto:bug-Dist-Zilla-Plugin-Test-PodSpelling@rt.cpan.org>).
+I am also usually active on irc, as 'ether' at C<irc.perl.org>.
+
 =cut

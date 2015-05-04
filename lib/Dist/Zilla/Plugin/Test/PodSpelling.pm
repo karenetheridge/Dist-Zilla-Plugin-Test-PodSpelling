@@ -251,6 +251,14 @@ register_prereqs
 
 =end Pod::Coverage
 
+=head1 SUPPORT
+
+=for stopwords irc
+
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginTest-PodSpelling>
+(or L<bug-Dist-Zilla-Plugin-Test-PodSpelling@rt.cpan.org|mailto:bug-Dist-Zilla-Plugin-Test-PodSpelling@rt.cpan.org>).
+I am also usually active on irc, as 'ether' at C<irc.perl.org>.
+
 =cut
 __DATA__
 ___[ xt/author/pod-spell.t ]___
