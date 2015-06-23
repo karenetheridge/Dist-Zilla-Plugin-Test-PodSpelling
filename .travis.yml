@@ -1,17 +1,17 @@
 language: perl
 perl:
-   - 5.18
-   - 5.16
-   - 5.14
-   - 5.12
-   - 5.10
+  - 5.18
+  - 5.16
+  - 5.14
+  - 5.12
+  - 5.10
 before_install:
-   - export AUTOMATED_TESTING=1
-   - git config --global user.name "TravisCI"
-   - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
+  - export AUTOMATED_TESTING=1
+  - git config --global user.name "TravisCI"
+  - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
 install:
-   - cpanm --quiet --notest --with-recommends Dist::Zilla::PluginBundle::Author::XENO
-   - "dzil authordeps | cpanm --quiet --notest"
-   - "dzil listdeps   | cpanm --verbose"
+  - cpanm --quiet --notest --with-recommends Dist::Zilla::PluginBundle::Author::XENO
+  - "dzil authordeps | cpanm --quiet --notest"
+  - "dzil listdeps   | cpanm --verbose"
 script:
-   - dzil smoke --release --author
+  - dzil smoke --release --author
