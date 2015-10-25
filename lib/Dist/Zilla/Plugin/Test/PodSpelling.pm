@@ -59,6 +59,23 @@ has _files => (
     isa     => 'ArrayRef[Dist::Zilla::Role::File]',
 );
 
+around dump_config => sub
+{
+    my ($orig, $self) = @_;
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        blessed($self) ne __PACKAGE__ ? ( version => $VERSION ) : (),
+        wordlist => $self->wordlist,
+        spell_cmd => $self->spell_cmd,
+        directories => [ sort @{ $self->directories } ],
+        # TODO: should only include manually-configured words
+        stopwords => [ sort @{ $self->stopwords } ],
+    };
+
+    return $config;
+};
+
 sub gather_files {
     my ($self) = @_;
 

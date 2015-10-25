@@ -2,6 +2,7 @@ Revision history for Dist-Zilla-Plugin-Test-PodSpelling
 
 {{$NEXT}}
           - documented the minimum timeline for removal of [PodSpellingTests]
+          - include config values in metadata when [MetaConfig] is used
 
 2.006009  2015-05-04 03:08:46Z
           - first release under new management
