@@ -138,8 +138,7 @@ sub munge_file {
             $file->content,
             {
                 name          => __PACKAGE__,
-                version       => __PACKAGE__->VERSION
-                    || 'bootstrapped version',
+                version       => __PACKAGE__->VERSION,
                 wordlist      => \$self->wordlist,
                 set_spell_cmd => \$set_spell_cmd,
                 add_stopwords => \$add_stopwords,
