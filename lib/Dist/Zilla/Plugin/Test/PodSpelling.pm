@@ -19,6 +19,11 @@ with (
 
 sub mvp_multivalue_args { return ( qw( stopwords directories ) ) }
 
+sub mvp_aliases { +{
+    directory => 'directories',
+    stopword => 'stopwords',
+} }
+
 has wordlist => (
     is      => 'ro',
     isa     => 'Str',
@@ -186,7 +191,7 @@ no Moose;
 
 =pod
 
-=for Pod::Coverage gather_files mvp_multivalue_args munge_files munge_file register_prereqs
+=for Pod::Coverage gather_files mvp_multivalue_args mvp_aliases munge_files munge_file register_prereqs
 
 =head1 SYNOPSIS
 
@@ -197,13 +202,13 @@ In C<dist.ini>:
 or:
 
     [Test::PodSpelling]
-    directories = docs
+    directory = docs
     wordlist = Pod::Wordlist
     spell_cmd = aspell list
-    stopwords = CPAN
-    stopwords = github
-    stopwords = stopwords
-    stopwords = wordlist
+    stopword = CPAN
+    stopword = github
+    stopword = stopwords
+    stopword = wordlist
 
 If you're using C<[ExtraTests]> it must come after C<[Test::PodSpelling]>,
 it's worth noting that this ships in the C<[@Basic]> bundle so you may have to
@@ -224,7 +229,7 @@ Called to add stopwords to the stopwords array. It is used to determine if
 automagically detected words are valid and print out debug logging for the
 process.
 
-=attr directories
+=attr directories (or directory)
 
 Additional directories you wish to search for POD spell checking purposes.
 C<bin> and C<lib> are set by default.
@@ -249,7 +254,7 @@ If stopwords is set then C<add_stopwords( E<lt>DATAE<gt> )> is added
 to the test file and the words are added after the C<__DATA__>
 section.
 
-C<stopwords> can appear multiple times, one word per line.
+C<stopword> or C<stopwords> can appear multiple times, one word per line.
 
 Normally no stopwords are added by default, but author names appearing in
 C<dist.ini> are automatically added as stopwords so you don't have to add them
