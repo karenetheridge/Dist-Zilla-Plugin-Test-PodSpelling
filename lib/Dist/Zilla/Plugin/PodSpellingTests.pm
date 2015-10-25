@@ -28,8 +28,12 @@ follow that of the dist>
 
 =head1 SYNOPSIS
 
-This Plugin extends L<Dist::Zilla::Test::PodSpelling> and adds nothing. It is the old
-name for C<[Test::PodSpelling]> and will be removed in a few versions.
+This is a plugin that runs at the L<gather files|Dist::Zilla::Role::FileGatherer> stage,
+providing the file:
+
+  xt/author/pod-spell.t - a standard Test::Spelling test
+
+It is the old name for C<[Test::PodSpelling]> and will be removed in a few versions.
 
 =head1 SEE ALSO
 

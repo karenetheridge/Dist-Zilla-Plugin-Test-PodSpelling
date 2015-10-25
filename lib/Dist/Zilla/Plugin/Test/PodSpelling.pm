@@ -194,8 +194,8 @@ remove it from that first.
 
 =head1 DESCRIPTION
 
-This is an extension of L<Dist::Zilla::Plugin::InlineFiles>, providing
-the following file:
+This is a plugin that runs at the L<gather files|Dist::Zilla::Role::FileGatherer> stage,
+providing the file:
 
   xt/author/pod-spell.t - a standard Test::Spelling test
 
