@@ -2,7 +2,6 @@
 use strict;
 use warnings;
 use Test::More 0.88;
-use Test::Requires 'Dist::Zilla::Plugin::Meta::Contributors';
 use Test::DZil;
 use Path::Tiny;
 
@@ -12,6 +11,15 @@ use Path::Tiny;
 my $fname  = 'Mister';
 my $lname = 'Mxyzptlk';
 my $email = 'mr_mxyzptlk@example.com';
+
+{
+    package MyContributors;
+    use Moose;
+    with 'Dist::Zilla::Role::MetaProvider';
+    sub mvp_multivalue_args { qw(contributor) }
+    has contributor => ( is => 'ro', isa => 'ArrayRef[Str]', lazy => 1, default => sub { [] } );
+    sub metadata { +{ x_contributors => shift->contributor } }
+}
 
 sub get_content {
   my ($args) = @_;
@@ -33,7 +41,7 @@ sub get_content {
           },
           [GatherDir =>],
           [$name => $args],
-          ['Meta::Contributors',
+          ['=MyContributors',
               {
                  contributor => ["$fname $lname <$email>"],
               }
