@@ -1,8 +1,7 @@
-package Dist::Zilla::Plugin::Test::PodSpelling;
-# vim: set ts=8 sts=4 sw=4 tw=115 et :
-
 use strict;
 use warnings;
+package Dist::Zilla::Plugin::Test::PodSpelling;
+# vim: set ts=8 sts=4 sw=4 tw=115 et :
 
 our $VERSION = '2.006010';
 
