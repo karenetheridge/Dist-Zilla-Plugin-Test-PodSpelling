@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::Test::PodSpelling;
-# vim: ts=4 sts=4 sw=4 et :
+# vim: set ts=8 sts=4 sw=4 tw=115 et :
 
 use strict;
 use warnings;
