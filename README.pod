@@ -8,24 +8,24 @@ Dist::Zilla::Plugin::Test::PodSpelling - Author tests for POD spelling
 
 =head1 VERSION
 
-version 2.006009
+version 2.007000
 
 =head1 SYNOPSIS
 
 In C<dist.ini>:
 
-	[Test::PodSpelling]
+    [Test::PodSpelling]
 
 or:
 
-	[Test::PodSpelling]
-	directories = docs
-	wordlist = Pod::Wordlist
-	spell_cmd = aspell list
-	stopwords = CPAN
-	stopwords = github
-	stopwords = stopwords
-	stopwords = wordlist
+    [Test::PodSpelling]
+    directory = docs
+    wordlist = Pod::Wordlist
+    spell_cmd = aspell list
+    stopword = CPAN
+    stopword = github
+    stopword = stopwords
+    stopword = wordlist
 
 If you're using C<[ExtraTests]> it must come after C<[Test::PodSpelling]>,
 it's worth noting that this ships in the C<[@Basic]> bundle so you may have to
@@ -33,8 +33,8 @@ remove it from that first.
 
 =head1 DESCRIPTION
 
-This is an extension of L<Dist::Zilla::Plugin::InlineFiles>, providing
-the following file:
+This is a plugin that runs at the L<gather files|Dist::Zilla::Role::FileGatherer> stage,
+providing the file:
 
   xt/author/pod-spell.t - a standard Test::Spelling test
 
@@ -42,7 +42,7 @@ L<Test::Spelling> will be added as a develop prerequisite.
 
 =head1 ATTRIBUTES
 
-=head2 directories
+=head2 directories (or directory)
 
 Additional directories you wish to search for POD spell checking purposes.
 C<bin> and C<lib> are set by default.
@@ -67,7 +67,7 @@ If stopwords is set then C<add_stopwords( E<lt>DATAE<gt> )> is added
 to the test file and the words are added after the C<__DATA__>
 section.
 
-C<stopwords> can appear multiple times, one word per line.
+C<stopword> or C<stopwords> can appear multiple times, one word per line.
 
 Normally no stopwords are added by default, but author names appearing in
 C<dist.ini> are automatically added as stopwords so you don't have to add them
@@ -83,19 +83,19 @@ Called to add stopwords to the stopwords array. It is used to determine if
 automagically detected words are valid and print out debug logging for the
 process.
 
-=for Pod::Coverage gather_files
-
-=for Pod::Coverage mvp_multivalue_args
-munge_files
-munge_file
-register_prereqs
+=for Pod::Coverage gather_files mvp_multivalue_args mvp_aliases munge_files munge_file register_prereqs
 
 =head1 SUPPORT
 
-=for stopwords irc
-
-Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginTest-PodSpelling>
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test-PodSpelling>
 (or L<bug-Dist-Zilla-Plugin-Test-PodSpelling@rt.cpan.org|mailto:bug-Dist-Zilla-Plugin-Test-PodSpelling@rt.cpan.org>).
+
+There is also a mailing list available for users of this distribution, at
+L<http://dzil.org/#mailing-list>.
+
+There is also an irc channel available for users of this distribution, at
+irc://irc.perl.org/#distzilla.
+
 I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
 =head1 AUTHORS
@@ -111,14 +111,6 @@ Caleb Cushing <xenoterracide@gmail.com>
 Marcel Gruenauer <hanekomu@gmail.com>
 
 =back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is Copyright (c) 2015 by Caleb Cushing.
-
-This is free software, licensed under:
-
-  The Artistic License 2.0 (GPL Compatible)
 
 =head1 CONTRIBUTORS
 
@@ -155,5 +147,13 @@ Alexandr Ciornii <alexchorny@gmail.com>
 Breno G. de Oliveira <garu@cpan.org>
 
 =back
+
+=head1 COPYRIGHT AND LICENCE
+
+This software is Copyright (c) 2010 by Karen Etheridge.
+
+This is free software, licensed under:
+
+  The Artistic License 2.0 (GPL Compatible)
 
 =cut
