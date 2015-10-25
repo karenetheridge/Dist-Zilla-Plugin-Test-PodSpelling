@@ -33,7 +33,9 @@ providing the file:
 
   xt/author/pod-spell.t - a standard Test::Spelling test
 
-It is the old name for C<[Test::PodSpelling]> and will be removed in a few versions.
+THIS MODULE IS DEPRECATED. Please use
+L<Dist::Zilla::Plugin::Test::PodSpelling> instead. it may be removed at a
+later time (but not before April 2016).
 
 =head1 SEE ALSO
 
