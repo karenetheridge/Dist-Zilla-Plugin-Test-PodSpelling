@@ -52,15 +52,15 @@ like   $content, qr/$lname2/xms, 'includes last name 2';
 unlike $content, qr/$mi    /xms, 'does not include the midddle initial';
 
 SKIP: {
-	use English '-no_match_Vars';
-	skip 'qr//m does not work properly in 5.8.8', 4,
-		unless $PERL_VERSION gt v5.10
-		;
+    use English '-no_match_Vars';
+    skip 'qr//m does not work properly in 5.8.8', 4,
+        unless $PERL_VERSION gt v5.10
+        ;
 
-	like   $content, qr/^$fname $/xms, q[includes first name];
-	like   $content, qr/^$lname1$/xms, q[includes last name 1];
-	like   $content, qr/^$lname2$/xms, q[includes last name 2];
-	unlike $content, qr/^$mi    $/xms, q[does not include the midddle initial];
+    like   $content, qr/^$fname $/xms, q[includes first name];
+    like   $content, qr/^$lname1$/xms, q[includes last name 1];
+    like   $content, qr/^$lname2$/xms, q[includes last name 2];
+    unlike $content, qr/^$mi    $/xms, q[does not include the midddle initial];
 }
 
 done_testing;

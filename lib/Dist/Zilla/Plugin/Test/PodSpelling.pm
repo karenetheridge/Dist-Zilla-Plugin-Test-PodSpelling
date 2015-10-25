@@ -9,159 +9,159 @@ our $VERSION = '2.006010';
 use Moose;
 extends 'Dist::Zilla::Plugin::InlineFiles';
 with (
-	'Dist::Zilla::Role::FileMunger',
-	'Dist::Zilla::Role::TextTemplate',
-	'Dist::Zilla::Role::FileFinderUser' => {
-		default_finders => [ ':InstallModules' ],
-	},
-	'Dist::Zilla::Role::PrereqSource',
+    'Dist::Zilla::Role::FileMunger',
+    'Dist::Zilla::Role::TextTemplate',
+    'Dist::Zilla::Role::FileFinderUser' => {
+        default_finders => [ ':InstallModules' ],
+    },
+    'Dist::Zilla::Role::PrereqSource',
 );
 
 sub mvp_multivalue_args { return ( qw( stopwords directories ) ) }
 
 has wordlist => (
-	is      => 'ro',
-	isa     => 'Str',
-	default => 'Pod::Wordlist',
+    is      => 'ro',
+    isa     => 'Str',
+    default => 'Pod::Wordlist',
 );
 
 has spell_cmd => (
-	is      => 'ro',
-	isa     => 'Str',
-	default => '',                           # default to original
+    is      => 'ro',
+    isa     => 'Str',
+    default => '',                           # default to original
 );
 
 has stopwords => (
-	is      => 'ro',
-	isa     => 'ArrayRef[Str]',
-	traits  => [ 'Array' ],
-	default => sub { [] },                   # default to original
-	handles => {
-		push_stopwords => 'push',
-		uniq_stopwords => 'uniq',
-		no_stopwords   => 'is_empty',
-	}
+    is      => 'ro',
+    isa     => 'ArrayRef[Str]',
+    traits  => [ 'Array' ],
+    default => sub { [] },                   # default to original
+    handles => {
+        push_stopwords => 'push',
+        uniq_stopwords => 'uniq',
+        no_stopwords   => 'is_empty',
+    }
 );
 
 has directories => (
-	isa     => 'ArrayRef[Str]',
-	traits  => [ 'Array' ],
-	is      => 'ro',
-	default => sub { [] },                   # default to original
-	handles => {
-		no_directories => 'is_empty',
-		print_directories => [ join => ' ' ],
-	}
+    isa     => 'ArrayRef[Str]',
+    traits  => [ 'Array' ],
+    is      => 'ro',
+    default => sub { [] },                   # default to original
+    handles => {
+        no_directories => 'is_empty',
+        print_directories => [ join => ' ' ],
+    }
 );
 
 has _files => (
-	is      => 'rw',
-	isa     => 'ArrayRef[Dist::Zilla::Role::File]',
+    is      => 'rw',
+    isa     => 'ArrayRef[Dist::Zilla::Role::File]',
 );
 
 sub gather_files {
-	my ($self) = @_;
+    my ($self) = @_;
 
-	my $data = $self->merged_section_data;
-	return unless $data and %$data;
+    my $data = $self->merged_section_data;
+    return unless $data and %$data;
 
-	my @files;
-	for my $name (keys %$data) {
-		my $file = Dist::Zilla::File::InMemory->new({
-			name    => $name,
-			content => ${ $data->{$name} },
-		});
-		$self->add_file($file);
-		push @files, $file;
-	}
+    my @files;
+    for my $name (keys %$data) {
+        my $file = Dist::Zilla::File::InMemory->new({
+            name    => $name,
+            content => ${ $data->{$name} },
+        });
+        $self->add_file($file);
+        push @files, $file;
+    }
 
-	$self->_files(\@files);
-	return;
+    $self->_files(\@files);
+    return;
 }
 
 sub add_stopword {
-	my ( $self, $data ) = @_;
+    my ( $self, $data ) = @_;
 
-	$self->log_debug( 'attempting stopwords extraction from: ' . $data );
-	# words must be greater than 2 characters
-	my ( $word ) = $data =~ /(\p{Word}{2,})/xms;
+    $self->log_debug( 'attempting stopwords extraction from: ' . $data );
+    # words must be greater than 2 characters
+    my ( $word ) = $data =~ /(\p{Word}{2,})/xms;
 
-	# log won't like an undef
-	return unless $word;
+    # log won't like an undef
+    return unless $word;
 
-	$self->log_debug( 'add stopword: ' . $word );
+    $self->log_debug( 'add stopword: ' . $word );
 
-	$self->push_stopwords( $word );
-	return;
+    $self->push_stopwords( $word );
+    return;
 }
 
 sub munge_files {
-	my ($self) = @_;
+    my ($self) = @_;
 
-	$self->munge_file($_) foreach @{ $self->_files };
-	return;
+    $self->munge_file($_) foreach @{ $self->_files };
+    return;
 }
 
 sub munge_file {
-	my ($self, $file) = @_;
+    my ($self, $file) = @_;
 
-	my ($set_spell_cmd, $add_stopwords, $stopwords);
-	if ($self->spell_cmd) {
-		$set_spell_cmd = sprintf "set_spell_cmd('%s');", $self->spell_cmd;
-	}
+    my ($set_spell_cmd, $add_stopwords, $stopwords);
+    if ($self->spell_cmd) {
+        $set_spell_cmd = sprintf "set_spell_cmd('%s');", $self->spell_cmd;
+    }
 
-	foreach my $holder ( split( /\s/xms, join( ' ',
-			@{ $self->zilla->authors },
-			$self->zilla->copyright_holder,
-			@{ $self->zilla->distmeta->{x_contributors} || [] },
-		))
-	) {
-		$self->add_stopword( $holder );
-	}
+    foreach my $holder ( split( /\s/xms, join( ' ',
+            @{ $self->zilla->authors },
+            $self->zilla->copyright_holder,
+            @{ $self->zilla->distmeta->{x_contributors} || [] },
+        ))
+    ) {
+        $self->add_stopword( $holder );
+    }
 
-	foreach my $file ( @{ $self->found_files } ) {
-		# many of my stopwords are part of a filename
-		$self->log_debug( 'splitting filenames for more words' );
+    foreach my $file ( @{ $self->found_files } ) {
+        # many of my stopwords are part of a filename
+        $self->log_debug( 'splitting filenames for more words' );
 
-		foreach my $name ( split( '/', $file->name ) ) {
-			$self->add_stopword( $name );
-		}
-	}
+        foreach my $name ( split( '/', $file->name ) ) {
+            $self->add_stopword( $name );
+        }
+    }
 
-	unless ( $self->no_stopwords ) {
-		$add_stopwords = 'add_stopwords(<DATA>);';
-		$stopwords = join "\n", '__DATA__', $self->uniq_stopwords;
-	}
+    unless ( $self->no_stopwords ) {
+        $add_stopwords = 'add_stopwords(<DATA>);';
+        $stopwords = join "\n", '__DATA__', $self->uniq_stopwords;
+    }
 
-	$file->content(
-		$self->fill_in_string(
-			$file->content,
-			{
-				name          => __PACKAGE__,
-				version       => __PACKAGE__->VERSION
-					|| 'bootstrapped version',
-				wordlist      => \$self->wordlist,
-				set_spell_cmd => \$set_spell_cmd,
-				add_stopwords => \$add_stopwords,
-				stopwords     => \$stopwords,
-				directories   => \$self->print_directories,
-			}
-		),
-	);
+    $file->content(
+        $self->fill_in_string(
+            $file->content,
+            {
+                name          => __PACKAGE__,
+                version       => __PACKAGE__->VERSION
+                    || 'bootstrapped version',
+                wordlist      => \$self->wordlist,
+                set_spell_cmd => \$set_spell_cmd,
+                add_stopwords => \$add_stopwords,
+                stopwords     => \$stopwords,
+                directories   => \$self->print_directories,
+            }
+        ),
+    );
 
-	return;
+    return;
 }
 
 sub register_prereqs {
-	my $self = shift;
-	$self->zilla->register_prereqs(
-		{
-			type  => 'requires',
-			phase => 'develop',
-		},
-		'Test::Spelling' => '0.12',
-	);
-	return;
+    my $self = shift;
+    $self->zilla->register_prereqs(
+        {
+            type  => 'requires',
+            phase => 'develop',
+        },
+        'Test::Spelling' => '0.12',
+    );
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -176,18 +176,18 @@ no Moose;
 
 In C<dist.ini>:
 
-	[Test::PodSpelling]
+    [Test::PodSpelling]
 
 or:
 
-	[Test::PodSpelling]
-	directories = docs
-	wordlist = Pod::Wordlist
-	spell_cmd = aspell list
-	stopwords = CPAN
-	stopwords = github
-	stopwords = stopwords
-	stopwords = wordlist
+    [Test::PodSpelling]
+    directories = docs
+    wordlist = Pod::Wordlist
+    spell_cmd = aspell list
+    stopwords = CPAN
+    stopwords = github
+    stopwords = stopwords
+    stopwords = wordlist
 
 If you're using C<[ExtraTests]> it must come after C<[Test::PodSpelling]>,
 it's worth noting that this ships in the C<[@Basic]> bundle so you may have to
