@@ -169,7 +169,7 @@ no Moose;
 
 =pod
 
-=for Pod::Coverage gather_files
+=for Pod::Coverage gather_files mvp_multivalue_args munge_files munge_file register_prereqs
 
 =head1 SYNOPSIS
 
@@ -239,15 +239,6 @@ C<dist.ini> are automatically added as stopwords so you don't have to add them
 manually just because they might appear in the C<AUTHORS> section of the
 generated POD document. The same goes for contributors listed under the
 'x_contributors' field on your distributions META file.
-
-=begin Pod::Coverage
-
-mvp_multivalue_args
-munge_files
-munge_file
-register_prereqs
-
-=end Pod::Coverage
 
 =cut
 __DATA__
