@@ -4,7 +4,7 @@ package Dist::Zilla::Plugin::Test::PodSpelling;
 # ABSTRACT: Author tests for POD spelling
 # vim: set ts=8 sts=4 sw=4 tw=115 et :
 
-our $VERSION = '2.007000';
+our $VERSION = '2.007001';
 
 use Moose;
 extends 'Dist::Zilla::Plugin::InlineFiles';
