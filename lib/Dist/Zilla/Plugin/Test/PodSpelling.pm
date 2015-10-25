@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 package Dist::Zilla::Plugin::Test::PodSpelling;
+# ABSTRACT: Author tests for POD spelling
 # vim: set ts=8 sts=4 sw=4 tw=115 et :
 
 our $VERSION = '2.006010';
@@ -167,7 +168,7 @@ __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
 
-# ABSTRACT: Author tests for POD spelling
+=pod
 
 =for Pod::Coverage gather_files
 
