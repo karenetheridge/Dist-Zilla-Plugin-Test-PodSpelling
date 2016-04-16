@@ -7,13 +7,12 @@ use Test::Requires;
 use Dist::Zilla::Tester;
 use Path::Tiny;
 use Cwd ();
-use English '-no_match_vars';
 
 BEGIN {
   plan skip_all => 'Perl must be in your path for these tests'
     unless qx/perl -e "print 123"/ == 123;
 
-  if ( $OSNAME eq 'MSWin32' ) {
+  if ( $^O eq 'MSWin32' ) {
     test_requires( 'Test::Spelling' => 0.17 );
   }
 }
