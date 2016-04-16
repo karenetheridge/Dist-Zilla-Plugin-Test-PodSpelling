@@ -1,6 +1,8 @@
 Revision history for Dist-Zilla-Plugin-Test-PodSpelling
 
 {{$NEXT}}
+          - remove uses of Path::Class API, to fix warnings when used with
+            Dist::Zilla 6.000
 
 2.007000  2015-10-25 01:29:05Z
           - documented the minimum timeline for removal of [PodSpellingTests]

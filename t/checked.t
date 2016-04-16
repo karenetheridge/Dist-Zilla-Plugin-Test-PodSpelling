@@ -62,7 +62,8 @@ sub spell_check_dist {
 
   my $cwd = Cwd::cwd;
   # tests typically run from the build dir
-  chdir $tzil->tempdir->subdir('build') or die "chdir failed: $!";
+  my $build_dir = path($tzil->tempdir)->child('build');
+  chdir $build_dir or die "chdir failed: $!";
 
   check_tests(
     sub {

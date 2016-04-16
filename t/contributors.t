@@ -51,8 +51,8 @@ sub get_content {
   );
 
   $zilla->build;
-  my $build_dir = $zilla->tempdir->subdir('build');
-  my $file = path($build_dir, 'xt', 'author', 'pod-spell.t');
+  my $build_dir = path($zilla->tempdir)->child('build');
+  my $file = $build_dir->child('xt', 'author', 'pod-spell.t');
   return $file->slurp_utf8;
 }
 
