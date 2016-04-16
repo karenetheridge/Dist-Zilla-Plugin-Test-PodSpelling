@@ -16,7 +16,7 @@ sub get_content {
   my ($args) = @_;
 
   my $name = 'Test::PodSpelling';
-  my $zilla = Builder->from_config(
+  my $tzil = Builder->from_config(
     { dist_root => 'corpus/foo' },
     {
       add_files => {
@@ -37,8 +37,8 @@ sub get_content {
     }
   );
 
-  $zilla->build;
-  my $build_dir = path($zilla->tempdir)->child('build');
+  $tzil->build;
+  my $build_dir = path($tzil->tempdir)->child('build');
   my $file = $build_dir->child('xt', 'author', 'pod-spell.t');
   return $file->slurp_utf8;
 }
