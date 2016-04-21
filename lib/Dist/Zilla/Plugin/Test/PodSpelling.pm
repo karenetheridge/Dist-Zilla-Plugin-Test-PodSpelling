@@ -12,7 +12,7 @@ with (
     'Dist::Zilla::Role::FileMunger',
     'Dist::Zilla::Role::TextTemplate',
     'Dist::Zilla::Role::FileFinderUser' => {
-        default_finders => [ ':InstallModules' ],
+        default_finders => [ ':InstallModules', ':ExecFiles' ],
     },
     'Dist::Zilla::Role::PrereqSource',
 );
@@ -141,6 +141,7 @@ sub munge_file {
         $self->add_stopword( $holder );
     }
 
+    # TODO: we should use the filefinder for the names of the files to check in, rather than hardcoding that list!
     foreach my $file ( @{ $self->found_files } ) {
         # many of my stopwords are part of a filename
         $self->log_debug( 'splitting filenames for more words' );
