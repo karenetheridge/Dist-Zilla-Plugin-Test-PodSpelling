@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Test::Tester;
 use Test::More 0.88;
-use Test::Requires;
+use Test::Needs;
 
 use Dist::Zilla::Tester;
 use Path::Tiny;
@@ -13,7 +13,7 @@ BEGIN {
     unless qx/perl -e "print 123"/ == 123;
 
   if ( $^O eq 'MSWin32' ) {
-    test_requires( 'Test::Spelling' => 0.17 );
+    test_needs( 'Test::Spelling' => 0.17 );
   }
 }
 
