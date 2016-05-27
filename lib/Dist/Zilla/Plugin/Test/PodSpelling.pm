@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 package Dist::Zilla::Plugin::Test::PodSpelling;
-# ABSTRACT: Author tests for POD spelling
 # vim: set ts=8 sts=4 sw=4 tw=115 et :
+# ABSTRACT: Author tests for POD spelling
+# KEYWORDS: plugin test spelling words stopwords typos errors documentation
 
 our $VERSION = '2.007001';
 
