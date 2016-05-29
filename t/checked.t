@@ -13,7 +13,7 @@ BEGIN {
     unless qx/perl -e "print 123"/ == 123;
 
   if ( $^O eq 'MSWin32' ) {
-    test_needs( 'Test::Spelling' => 0.17 );
+    test_needs { 'Test::Spelling' => 0.17 };
   }
 }
 
