@@ -8,7 +8,7 @@ Dist::Zilla::Plugin::Test::PodSpelling - Author tests for POD spelling
 
 =head1 VERSION
 
-version 2.007001
+version 2.007002
 
 =head1 SYNOPSIS
 

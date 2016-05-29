@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Plugin-Test-PodSpelling
 
-{{$NEXT}}
+2.007002  2016-05-29 04:09:13Z
           - fix broken test in MSWin32
 
 2.007001  2016-05-27 22:59:31Z
