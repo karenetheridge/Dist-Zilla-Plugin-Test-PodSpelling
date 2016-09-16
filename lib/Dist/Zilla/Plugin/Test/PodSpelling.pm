@@ -34,14 +34,14 @@ has wordlist => (
 has spell_cmd => (
     is      => 'ro',
     isa     => 'Str',
-    default => '',                           # default to original
+    default => '',
 );
 
 has stopwords => (
     is      => 'ro',
     isa     => 'ArrayRef[Str]',
     traits  => [ 'Array' ],
-    default => sub { [] },                   # default to original
+    default => sub { [] },
     handles => {
         push_stopwords => 'push',
         uniq_stopwords => 'uniq',
