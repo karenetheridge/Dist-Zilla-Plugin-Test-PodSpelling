@@ -154,7 +154,7 @@ sub munge_file {
 
     my $stopwords = $self->no_stopwords
         ? undef
-        : join("\n", '__DATA__', $self->uniq_stopwords);
+        : join("\n", '__DATA__', sort $self->uniq_stopwords);
 
     $file->content(
         $self->fill_in_string(
