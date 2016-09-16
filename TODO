@@ -4,3 +4,18 @@
 - do not inline the list of directories to test -- use filefinders instead.
     or at least allow for not passing bin and lib into the list?
 - develop prereqs also go into x_author_test
+
+
+
+
+genio wants stopwords to be populated from a local file:
+https://gist.github.com/genio/a5e6c8261e030d2514756ff1a38f90e4
+see my notes on #distzilla on 2016-05-21.
+it goes with https://rt.cpan.org/Ticket/Display.html?id=105676
+
+
+14:59 < ether> genio: is there a wishlist ticket describing what you're asking for?
+15:05 < genio> yes.  https://rt.cpan.org/Ticket/Display.html?id=105676
+15:05 < dipsy> [ Bug #105676 for Dist-Zilla-Plugin-Test-PodSpelling: list of stopwords in external file ] 
+15:07 < genio> and what I worked up: https://gist.github.com/genio/a5e6c8261e030d2514756ff1a38f90e4  although mine was a deliberately naive attempt (no docs, and the stopwords filename was not defineable, etc)
+15:07 < dipsy> [ Stopwords file · GitHub ]
