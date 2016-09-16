@@ -128,11 +128,11 @@ sub munge_files {
 sub munge_file {
     my ($self, $file) = @_;
 
-    my ($set_spell_cmd, $add_stopwords, $stopwords);
-    if ($self->spell_cmd) {
-        $set_spell_cmd = sprintf "set_spell_cmd('%s');", $self->spell_cmd;
-    }
+    my $set_spell_cmd = $self->spell_cmd
+        ? sprintf("set_spell_cmd('%s');", $self->spell_cmd)
+        : undef;
 
+    # TODO - move this into an attribute builder
     foreach my $holder ( split( /\s/xms, join( ' ',
             @{ $self->zilla->authors },
             $self->zilla->copyright_holder,
@@ -152,10 +152,9 @@ sub munge_file {
         }
     }
 
-    unless ( $self->no_stopwords ) {
-        $add_stopwords = 'add_stopwords(<DATA>);';
-        $stopwords = join "\n", '__DATA__', $self->uniq_stopwords;
-    }
+    my $stopwords = $self->no_stopwords
+        ? undef
+        : join("\n", '__DATA__', $self->uniq_stopwords);
 
     $file->content(
         $self->fill_in_string(
@@ -165,7 +164,6 @@ sub munge_file {
                 version       => __PACKAGE__->VERSION,
                 wordlist      => \$self->wordlist,
                 set_spell_cmd => \$set_spell_cmd,
-                add_stopwords => \$add_stopwords,
                 stopwords     => \$stopwords,
                 directories   => \$self->print_directories,
             }
@@ -276,6 +274,6 @@ use Test::Spelling 0.12;
 use {{ $wordlist }};
 
 {{ $set_spell_cmd }}
-{{ $add_stopwords }}
+{{ $stopwords ? 'add_stopwords(<DATA>);' : undef }}
 all_pod_files_spelling_ok( qw( {{ $directories }} ) );
 {{ $stopwords }}
