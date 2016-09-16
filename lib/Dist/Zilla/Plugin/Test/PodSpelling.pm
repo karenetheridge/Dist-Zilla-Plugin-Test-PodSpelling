@@ -53,7 +53,7 @@ has directories => (
     isa     => 'ArrayRef[Str]',
     traits  => [ 'Array' ],
     is      => 'ro',
-    default => sub { [] },                   # default to original
+    default => sub { [ qw(bin lib) ] },
     handles => {
         no_directories => 'is_empty',
         print_directories => [ join => ' ' ],
@@ -277,5 +277,5 @@ use {{ $wordlist }};
 
 {{ $set_spell_cmd }}
 {{ $add_stopwords }}
-all_pod_files_spelling_ok( qw( bin lib {{ $directories }} ) );
+all_pod_files_spelling_ok( qw( {{ $directories }} ) );
 {{ $stopwords }}
