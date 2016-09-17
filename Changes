@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Plugin-Test-PodSpelling
 
-{{$NEXT}}
+2.007003  2016-09-17 01:13:11Z
           - only add 'bin', 'lib' to directories list if a custom list was not
             passed. This also prevents a directory from being tested twice.
           - keep the stopwords list in the __DATA__ section sorted, for
