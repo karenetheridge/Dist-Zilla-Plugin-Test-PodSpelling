@@ -1,6 +1,7 @@
 Revision history for Dist-Zilla-Plugin-Test-PodSpelling
 
 {{$NEXT}}
+          - fix tests to not rely on . in @INC (Graham Knop)
 
 2.007003  2016-09-17 01:13:11Z
           - only add 'bin', 'lib' to directories list if a custom list was not
