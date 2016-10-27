@@ -9,11 +9,13 @@ our $VERSION = '2.007004';
 use Moose;
 extends 'Dist::Zilla::Plugin::Test::PodSpelling';
 
-before register_component => sub {
-    warnings::warnif('deprecated',
-        "!!! [PodSpellingTests] is deprecated and will be removed in a future release; replace it with [Test::PodSpelling]\n",
-    );
-};
+# use warnings categories from the caller, not these modules
+use Carp ();
+local $Carp::Internal{'Class::Load'} = 1;
+local $Carp::Internal{'Module::Runtime'} = 1;
+warnings::warnif('deprecated',
+    '!!! [PodSpellingTests] is deprecated and will be removed in a future release; replace it with [Test::PodSpelling]',
+);
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
