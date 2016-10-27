@@ -1,5 +1,7 @@
 Revision history for Dist-Zilla-Plugin-Test-PodSpelling
 
+{{$NEXT}}
+
 2.007004  2016-10-27 02:00:39Z
           - fix tests to not rely on . in @INC (Graham Knop)
 
