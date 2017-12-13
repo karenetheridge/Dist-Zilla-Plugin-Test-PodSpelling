@@ -1,8 +1,9 @@
 - remove use of corpus files - inline them
-- remove use of Test::Strict
 - remove use of Test::Tester
+
 - do not inline the list of directories to test -- use filefinders instead.
     or at least allow for not passing bin and lib into the list?
+
 - develop prereqs also go into x_author_test
 
 
