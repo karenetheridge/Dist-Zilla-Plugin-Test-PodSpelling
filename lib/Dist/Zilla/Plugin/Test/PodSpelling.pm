@@ -250,7 +250,7 @@ Defaults to nothing.
 
 =attr stopwords
 
-If stopwords is set then C<add_stopwords( E<lt>DATAE<gt> )> is added
+If stopwords is set then C<< add_stopwords( <DATA> ) >> is added
 to the test file and the words are added after the C<__DATA__>
 section.
 
