@@ -5,8 +5,10 @@ addons:
       - aspell
 language: perl
 perl:
-# for what versions are available, see:
-# https://github.com/travis-ci/travis-cookbooks/blob/master/ci_environment/perlbrew/attributes/multi.rb
+  - blead   # builds perl from git
+  - dev     # latest point release
+  - "5.26"
+  - "5.24"
   - "5.22"
   - "5.20"
   - "5.18"
@@ -14,13 +16,23 @@ perl:
   - "5.14"
   - "5.12"
   - "5.10"
+  - "5.8"
+env:
+  global:
+    - AUTHOR_TESTING=1
+    - AUTOMATED_TESTING=1
+    - RELEASE_TESTING=0
 before_install:
-  - export AUTOMATED_TESTING=1
-  - git config --global user.name "TravisCI"
-  - git config --global user.email $HOSTNAME":not-for-mail@travis-ci.org"
+  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+  - source ~/travis-perl-helpers/init
+  - build-perl
+  - perl -V
+  - build-dist
+  - cd $BUILD_DIR
 install:
-  - cpanm --quiet JSON::PP
-  - "dzil authordeps | cpanm --quiet --notest"
-  - "dzil listdeps   | cpanm --verbose"
+  - perl -M5.014 -e1 2>/dev/null || cpan-install Dist::Zilla@5.047
+  - cpan-install --deps
 script:
-  - dzil smoke --release --author
+  - perl Build.PL
+  - ./Build
+  - prove -b -r -s -j1 $(test-files)
