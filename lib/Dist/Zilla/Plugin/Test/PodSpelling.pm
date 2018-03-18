@@ -8,6 +8,7 @@ package Dist::Zilla::Plugin::Test::PodSpelling;
 our $VERSION = '2.007006';
 
 use Moose;
+use MooseX::Types::Path::Tiny;
 extends 'Dist::Zilla::Plugin::InlineFiles';
 with (
     'Dist::Zilla::Role::FileMunger',
@@ -47,6 +48,13 @@ has stopwords => (
         uniq_stopwords => 'uniq',
         no_stopwords   => 'is_empty',
     }
+);
+
+has stopwords_file => (
+    is     => 'ro',
+    isa    => MooseX::Types::Path::Tiny::File,
+    coerce => 1,
+    trigger => \&_add_stopwords_from_file,
 );
 
 has directories => (
@@ -116,6 +124,18 @@ sub add_stopword {
 
     $self->push_stopwords( $word );
     return;
+}
+
+sub _add_stopwords_from_file {
+    my ( $self ) = @_;
+
+    $self->log_debug( 'attempting to load stopwords from file: '
+                          . $self->stopwords_file);
+
+    for my $sw ($self->stopwords_file->lines({ chomp => 1 })) {
+        $sw =~ s/^\s+|\s+$//g;
+        $self->add_stopword($sw);
+    }
 }
 
 sub munge_files {
@@ -261,6 +281,12 @@ C<dist.ini> are automatically added as stopwords so you don't have to add them
 manually just because they might appear in the C<AUTHORS> section of the
 generated POD document. The same goes for contributors listed under the
 'x_contributors' field on your distributions META file.
+
+=attr stopwords_file
+
+If a C<stopwords_file> is provided, the words listed in the file are added as
+stopwords.  Words should be listed one-per-line.  Leading and trailing spaces
+are trimmed.
 
 =cut
 __DATA__
