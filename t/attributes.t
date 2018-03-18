@@ -31,8 +31,9 @@ sub get_content {
           },
           [GatherDir =>],
           [$name => $args],
-        )
-      }
+        ),
+        'source/.stopwords' => " yoyo\nnibster  ", # spaces should be trimmed
+      },
     }
   );
 
@@ -63,5 +64,10 @@ $content = get_content({spell_cmd => 'all_wrong'});
 
 $content = get_content({stopwords => 'foohoo'});
   like $content, qr/__DATA__\s(.*\s)*foohoo\b/,   q[add stopwords];
+
+$content = get_content({stopwords_file => '.stopwords'});
+  cmp_deeply([ get_stopwords($content) ],
+             superbagof($fname, $lname, 'yoyo', 'nibster'),
+             'DATA handle includes stopwords from file');
 
 done_testing;
