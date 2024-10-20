@@ -1,5 +1,7 @@
 Revision history for Dist-Zilla-Plugin-Test-PodSpelling
 
+{{$NEXT}}
+
 2.007006  2024-10-20 18:45:15Z
           - bump dependency on Test::Spelling, and move it to a test prereq
 

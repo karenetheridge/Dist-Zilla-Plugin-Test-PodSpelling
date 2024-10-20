@@ -5,7 +5,7 @@ package Dist::Zilla::Plugin::Test::PodSpelling;
 # ABSTRACT: Author tests for POD spelling
 # KEYWORDS: plugin test spelling words stopwords typos errors documentation
 
-our $VERSION = '2.007006';
+our $VERSION = '2.007007';
 
 use Moose;
 extends 'Dist::Zilla::Plugin::InlineFiles';
