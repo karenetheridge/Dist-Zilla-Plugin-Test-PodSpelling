@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::PodSpellingTests;
 # ABSTRACT: (DEPRECATED) The old name of the PodSpelling plugin
-# vim: set ts=8 sts=4 sw=4 tw=115 et :
+# vim: set ts=8 sts=2 sw=2 tw=115 et :
 
 our $VERSION = '2.007006';
 
