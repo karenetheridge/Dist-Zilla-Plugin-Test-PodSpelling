@@ -70,7 +70,7 @@ sub spell_check_dist {
     },
     [
       # results we're expecting
-      map {
+      map
         +{
           # expected test result ('ok' or 'not ok')
           ok => 1,
@@ -81,9 +81,7 @@ sub spell_check_dist {
           # overridden expectations (in args to spell_check_dist)
           %{ $_->[1] },
         },
-      }
-      map { ref $_ eq 'ARRAY' ? $_ : [$_ => {}] }
-        @files
+        map ref $_ eq 'ARRAY' ? $_ : [$_ => {}], @files
     ],
     "spell check pod for $dir"
   );
