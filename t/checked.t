@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::Tester;
 use Test::More 0.88;
-use Test::Needs;
 
 use Dist::Zilla::Tester;
 use Path::Tiny;
@@ -11,10 +10,6 @@ use Cwd ();
 BEGIN {
   plan skip_all => 'Perl must be in your path for these tests'
     unless qx/perl -e "print 123"/ == 123;
-
-  if ( $^O eq 'MSWin32' ) {
-    test_needs { 'Test::Spelling' => 0.17 };
-  }
 }
 
 # This test uses a custom "spell checker" defined in corpus/*/dist.ini
